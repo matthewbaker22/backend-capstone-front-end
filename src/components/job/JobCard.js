@@ -4,10 +4,10 @@ const JobCard = props => {
     return (
         <div>
             <div>
-                <p>{props.job.job_id.company_name}</p>
-                <p>{props.job.job_id.job_title}</p>
-                <p>{props.job.job_id.notes}</p>
-                <p>{props.job.job_id.interview_date}</p>
+                <p>{props.job.job.company_name}</p>
+                <p>{props.job.job.job_title}</p>
+                <p>{props.job.job.notes}</p>
+                <p>{props.job.job.interview_date}</p>
             </div>
         </div>
     )

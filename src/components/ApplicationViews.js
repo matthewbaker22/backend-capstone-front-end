@@ -5,6 +5,7 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import Home from "./home/Home"
 import Job from "./job/Job"
+import JobForm from "./job/JobForm"
 
 
 const ApplicationViews = () => {
@@ -21,6 +22,9 @@ const ApplicationViews = () => {
             }}/>
             <Route exact path="/jobs" render={props => {
                 return <Job {...props}/>
+            }}/>
+            <Route exact path="/job_form" render={props => {
+                return <JobForm {...props}/>
             }}/>
 
         </React.Fragment>
