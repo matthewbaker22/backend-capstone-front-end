@@ -5,7 +5,14 @@ import JobCard from "./JobCard"
 
 const Job = (props) => {
     const [jobs, setJobs] = useState([])
+    const [jobsFilter, setJobsFilter] = useState({company_name: ""})
     const [reload, setReload] = useState(false)
+
+    const handleFieldChange = (evt) => {
+        const stateToChange = {...jobsFilter}
+        stateToChange[evt.target.id] = evt.target.value
+        setJobsFilter(stateToChange)
+    }
 
     const getJobs = () => {
         return JobManager.getAllJobsFromJobStatusTable().then((JobsFromAPI) => {
@@ -23,8 +30,17 @@ const Job = (props) => {
         })
     }
 
-    const pushToEdit = id => {
-        props.history.push(`/jobs/${id}/edit`)
+    const searchUseEffect = () => {
+        getFilteredJobs(jobsFilter.company_name)
+    }
+
+    const getFilteredJobs = (companyName) => {
+        return JobManager.getFilteredJobs(companyName).then((JobsFromAPI => {
+            const FilteredJobsFromAPI = JobsFromAPI.filter(jobStatus => jobStatus.job.company_name.toUpperCase() === jobsFilter.company_name.toUpperCase())
+            setJobs(FilteredJobsFromAPI)
+            console.log(FilteredJobsFromAPI, "FILTERED JOBS")
+            console.log(JobsFromAPI)
+        }))
     }
 
     useEffect(() => {
@@ -33,6 +49,11 @@ const Job = (props) => {
 
     console.log(jobs)
     return (
+        <>
+        <div>
+            <input type="text" placeholder="Search Jobs" id="company_name" onChange={handleFieldChange}></input>
+            <button type="submit" onClick={searchUseEffect}>Search</button>
+        </div>
         <div>
             <div>
                 <h3>Wishlist</h3>
@@ -130,6 +151,7 @@ const Job = (props) => {
                 ))}
             </div>
         </div>
+        </>
     )
 }
 

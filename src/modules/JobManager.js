@@ -64,5 +64,12 @@ export default {
                 "Authorization": `Token ${token}`
             }
         }).then(resp => resp.json())
+    },
+    getFilteredJobs(companyName) {
+        return fetch(`${url}/job_status`, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        }).then(resp => resp.json())
     }
 }
