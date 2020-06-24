@@ -46,5 +46,23 @@ export default {
                 "Authorization": `Token ${token}`
             }
         })
+    },
+    updateJob(editedJob) {
+        return fetch(`${url}/jobs/${editedJob.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${token}`
+            },
+            body: JSON.stringify(editedJob)
+        })
+    },
+    getSingleJob(id) {
+        return fetch(`${url}/jobs/${id}`, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        }).then(resp => resp.json())
     }
 }

@@ -23,6 +23,10 @@ const Job = (props) => {
         })
     }
 
+    const pushToEdit = id => {
+        props.history.push(`/jobs/${id}/edit`)
+    }
+
     useEffect(() => {
         getJobs()
     }, [reload])
@@ -37,11 +41,15 @@ const Job = (props) => {
                 </Link>
                 {jobs.map(job => (
                     job.status_id == "1" ? 
-                        <div>
-                            <JobCard key={job.id} job={job} {...props}/>
-                            <button>Edit</button>  
-                            <button>Delete</button>
-                        </div>                
+                    <div>
+                        <JobCard key={job.id} job={job} {...props}/>
+                            <button type="button" onClick={() => {
+                                props.history.push(`/jobs/${job.id}/edit`)
+                            }}>Edit</button> 
+                            <button onClick={() => 
+                                handleDelete(job.id)
+                            }>Delete</button>
+                    </div>                
                     : <></>
                 ))}
             </div>
@@ -54,8 +62,12 @@ const Job = (props) => {
                     job.status_id == "2" ? 
                     <div>
                         <JobCard key={job.id} job={job} {...props}/> 
-                        <button>Edit</button>  
-                        <button>Delete</button>
+                        <button type="button" onClick={() => {
+                            props.history.push(`/jobs/${job.id}/edit`)
+                        }}>Edit</button> 
+                        <button onClick={() => 
+                            handleDelete(job.id)
+                        }>Delete</button>
                     </div>                    
                     : <></>
                 ))}
@@ -69,8 +81,12 @@ const Job = (props) => {
                     job.status_id == "3" ? 
                     <div>
                         <JobCard key={job.id} job={job} {...props}/>  
-                        <button>Edit</button> 
-                        <button>Delete</button>
+                        <button type="button" onClick={() => {
+                            props.history.push(`/jobs/${job.id}/edit`)
+                        }}>Edit</button>  
+                        <button onClick={() => 
+                            handleDelete(job.id)
+                        }>Delete</button>
                     </div>                    
                     : <></>
                 ))}
@@ -84,8 +100,12 @@ const Job = (props) => {
                     job.status_id == "4" ? 
                     <div>
                         <JobCard key={job.id} job={job} {...props}/>  
-                        <button>Edit</button> 
-                        <button>Delete</button>
+                        <button type="button" onClick={() => {
+                            props.history.push(`/jobs/${job.id}/edit`)
+                        }}>Edit</button> 
+                        <button onClick={() => 
+                            handleDelete(job.id)
+                        }>Delete</button>
                     </div>                    
                     : <></>
                 ))}
@@ -99,7 +119,9 @@ const Job = (props) => {
                     job.status_id == "5" ? 
                     <div>
                         <JobCard key={job.id} job={job} {...props}/> 
-                        <button>Edit</button>  
+                        <button type="button" onClick={() => {
+                            props.history.push(`/jobs/${job.id}/edit`)
+                        }}>Edit</button>  
                         <button onClick={() => 
                             handleDelete(job.id)
                         }>Delete</button>
